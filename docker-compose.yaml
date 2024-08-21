@@ -1,0 +1,26 @@
+version: "3"
+services:
+  crashreportdb:
+    image: postgres
+    container_name: crashreportdb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: crashreport
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  crashreport:
+    image: dpage/pgadmin4
+    container_name: crash-report
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5051:80"
+    depends_on:
+      - crashreportdb
+
+volumes:
+  postgres_data:
