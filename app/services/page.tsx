@@ -34,7 +34,7 @@ export default function Dashboard() {
 
   const fetchServices = async () => {
     const { data } = await axios.get("/api/monitor");
-    console.log(data);
+    console.log(data, "data");
   };
 
   const handleAddService = async () => {
