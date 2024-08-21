@@ -32,6 +32,11 @@ export default function Dashboard() {
     fetchServices();
   }, []);
 
+  const fetchServices = async () => {
+    const { data } = await axios.get("/api/monitor");
+    console.log(data);
+  };
+
   const handleAddService = async () => {
     if (!newService.name || !newService.url)
       return alert("Name and URL are required.");
@@ -51,10 +56,14 @@ export default function Dashboard() {
       <div className="max-w-4xl mx-auto">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Service Status Dashboard</h1>
-          <span className="flex items-center text-green-500 text-lg">
-            <AiFillCheckCircle className="w-6 h-6 mr-2" />
-            All systems operational
-          </span>
+          <div className="flex justify-between items-center">
+            <span className="flex items-center text-green-500 text-lg">
+              <AiFillCheckCircle className="w-6 h-6 mr-2" />
+              All systems operational
+            </span>
+
+            <button onClick={fetchServices}>Reload Monitor</button>
+          </div>
         </header>
 
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
